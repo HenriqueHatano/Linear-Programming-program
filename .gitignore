@@ -1,0 +1,28 @@
+# Ambiente virtual — nunca sobe pro Git
+venv/
+.venv/
+env/
+
+# Arquivos de configuração sensível
+.env
+*.env
+secrets.toml
+
+# Cache do Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Cache do Streamlit
+.streamlit/secrets.toml
+
+# Arquivos do sistema macOS
+.DS_Store
+
+# Arquivos de IDE (VS Code, PyCharm)
+.vscode/
+.idea/
+
+# Logs e arquivos temporários
+*.log
+*.tmp
