@@ -1,5 +1,7 @@
 import streamlit as st
 import numpy as np
+from utils.entrada import extrair_dados_formulario, validar_dados
+
 
 st.title("Programação Linear")
 
@@ -51,32 +53,14 @@ if barraLateral == "Simplex":
     
     resolver = st.button("Resolver")
 
-
-    ###### Armazenando os valores de FO dentro de uma lista c ######
-
-    c = []
-
-    for i in range(num_variaveis):
-        c.append(st.session_state['fo_' + str(i)])
-
-    constante = st.session_state['fo_constante']
-
-    ###### Armazenando coeficientes das restrições ###
-    
-    A = []
-
-    for i in range(num_restricoes):
-        linha = []
-        for j in range(num_variaveis):
-            linha.append(st.session_state['restricao_' + str(i) + '_' + str(j)])
-            A.append(linha)
-        
-        tipos = []
-        b = []
-
-        for i in range(num_restricoes):
-            tipos.append(st.session_state['tipo_' + str(i)])
-            b.append(st.session_state['b_' + str(i)])
-
     if resolver:
-        
+        # Extrai os dados de forma limpa
+        c, constante, A, tipos, b = extrair_dados_formulario(num_variaveis, num_restricoes, st.session_state)
+
+        # Valida os dados antes de rodar os cálculos
+        valido, mensagem = validar_dados(barraLateral, num_variaveis, c, A, tipos, b)
+
+        if not valido:
+            st.error(mensagem)
+        else:
+            st.success("Problema formulado com sucesso! Pronto para executar o método.")
