@@ -49,7 +49,7 @@ def validar_dados(metodo, num_variaveis, c, A, tipos, b):
         if len(tipos_invalidos) > 0:
             return False, "O Simplex padrão só aceita restrições do tipo '<='. Para restrições '>=' ou '=', use o Big-M."
 
-    for i, linha in enumerate(b):
+    for i, linha in enumerate(A):
         if np.all(linha == 0):
             return False, f"A restrição {i + 1} possui todos os coeficientes zerados."
 
